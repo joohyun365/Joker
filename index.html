@@ -152,8 +152,23 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Presentation Slides</h2>
+          <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px;">
+              <video poster="" id="presentation-video" controls width="100%">
+                <source src="static/videos/IoTPresentation.mp4" type="video/mp4">
+              </video>
+          </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="section">
     <div class="container is-max-desktop">
@@ -183,117 +198,61 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full">
-            <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo</h2>
-            <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
-                <video poster="" id="demo-video" controls muted loop width="100%">
-                  <source src="static/videos/IoT-Joker_Demo.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Presentation Slides</h2>
-            <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px;">
-                <video poster="" id="presentation-video" controls width="100%">
-                  <source src="static/videos/IoT-Joker_Presentaion.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero is-small">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
           <div class="content">
             <h2 class="title is-3" style="border-left: 5px solid #ff0080; padding-left: 10px;">
                Core Features
-            </h2>
-            <div class="content has-text-justified">
-              <p>Joker integrates multiple IoT capabilities to create a rich user experience:</p>
-              <ul>
+              </h2>
+              <div class="content has-text-justified">
+                <p>Joker integrates multiple IoT capabilities to create a rich user experience:</p>
+                <ul>
                   <li><strong>Smart Retrieval:</strong> Fetches random jokes via API based on user-selected categories (Programming, Dark, Pun, etc.).</li>
                   <li><strong>Real-time Translation:</strong> Automatically translates English jokes into Korean for a bilingual experience.</li>
                   <li><strong>Physical Interaction:</strong> Supports 'Keypad Input' for controls.</li>
                   <li><strong>Auditory & Visual Feedback:</strong> Adaptive Buzzer sounds based on ratings.</li>
                   <li><strong>Ranking System:</strong> Tracks user ratings in the cloud and displays the 'Top 3 Hall of Fame'.</li>
-              </ul>
-            </div>
+                </ul>
+              </div>
              <div style="text-align: center; margin-top: 30px;">
                 <img src="static/images/final_diagram.png" alt="Overview" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
                 <p class="is-size-6" style="color: #666;">Figure: Complete System Architecture</p>
-             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero is-small">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="content">
-           <h2 class="title is-3" style="border-left: 5px solid #7928ca; padding-left: 10px;">
-             Implementation & Workflow
-           </h2>
-           
-           <div class="content has-text-justified">
-              <p>
-                We overcame the hardware limitations of the ESP32 (Memory/SSL issues) by designing a <strong>Cloud-Offloaded Architecture</strong>.
-              </p>
-              
-              <h4 class="title is-4">System Workflow</h4>
-              <p>The system operates in a loop: <strong>Input &rarr; Process (Cloud Proxy) &rarr; Output &rarr; Feedback</strong>.</p>
-              
-                          <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
-            </div>
-
-            <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow2.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-            </div>
-
+              </div>
               <h4 class="title is-4">Technical Stack</h4>
               <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th style="width: 30%;">Component</th>
-                    <th>Technology Used</th>
+               <thead>
+                 <tr>
+                   <th style="width: 30%;">Component</th>
+                   <th>Technology Used</th>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>MCU</strong></td>
-                    <td>ESP32 (Wokwi Simulation & Hardware)</td>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td><strong>MCU</strong></td>
+                   <td>ESP32 (Wokwi Simulation & Hardware)</td>
+                 </tr>
+                 <tr>
+                   <td><strong>Middleware</strong></td>
+                   <td>Make.com (Webhook, JSON Parser, HTTP Router)</td>
                   </tr>
-                  <tr>
-                    <td><strong>Middleware</strong></td>
-                    <td>Make.com (Webhook, JSON Parser, HTTP Router)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Database</strong></td>
-                    <td>Google Sheets API (Logging, Sorting, Ranking)</td>
+                 <tr>
+                   <td><strong>Database</strong></td>
+                   <td>Google Sheets API (Logging, Sorting, Ranking)</td>
                   </tr>
                   <tr>
                     <td><strong>Translation</strong></td>
-                    <td>Google Translate API (via Make.com)</td>
+                   <td>Google Translate API (via Make.com)</td>
                   </tr>
-                  <tr>
-                    <td><strong>Peripherals</strong></td>
-                    <td>ILI9341 LCD, 4x4 Keypad, Passive Buzzer</td>
-                  </tr>
-                </tbody>
-              </table>
-           </div>
-        </div> 
+                 <tr>
+                   <td><strong>Peripherals</strong></td>
+                   <td>ILI9341 LCD, 4x4 Keypad, Passive Buzzer</td>
+                 </tr>
+               </tbody>
+             </table>
+            </div>
         </div>
       </div>
     </div>
   </section>
-
+  
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -327,14 +286,14 @@
                   <td>
                     <ul>
                         <li>각자 채우기</li>
-                    </ul>
+                      </ul>
                   </td>
                 </tr>
                 <tr>
                   <td class="has-text-centered"><strong>김태연</strong></td>
                   <td>
                     <ul>
-                        <li>각자 채우기</li>
+                      <li>각자 채우기</li>
                     </ul>
                   </td>
                 </tr>
@@ -346,13 +305,70 @@
     </div>
   </section>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code> Sora2, Banana Pro, Make.com, Google Sheets API, ESP32</code></pre>
+  <section class="section hero is-small">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <div class="content">
+           <h2 class="title is-3" style="border-left: 5px solid #7928ca; padding-left: 10px;">
+             Implementation & Workflow
+            </h2>
+            
+           <div class="content has-text-justified">
+              <p>
+                We overcame the hardware limitations of the ESP32 (Memory/SSL issues) by designing a <strong>Cloud-Offloaded Architecture</strong>.
+              </p>
+              
+              <h4 class="title is-4">System Workflow</h4>
+              <p>The system operates in a loop: <strong>Input &rarr; Process (Cloud Proxy) &rarr; Output &rarr; Feedback</strong>.</p>
+              
+              <!-- <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
+              </div>
+              
+              <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/workflow3.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
+              </div> -->
+              
+              <div style="display: flex; justify-content: center; align-items: center; gap: 100px; margin-bottom: 30px;">
+                <div style="width: 450px; text-align: center;">
+                  <img src="static/images/workflow1.png" alt="Category Icon" style="width: 100%;">
+                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
+                </div>
+                <div style="width: 300px; text-align: center;">
+                  <img src="static/images/workflow3.png" alt="Translate Icon" style="width: 100%;">
+                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/appscript_code.png" alt="appscript_code" style="max-width: 50%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Appscript Code</p>
+            </div>
+           </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo</h2>
+        <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
+          <video poster="" id="demo-video" controls muted loop width="100%">
+            <source src="static/videos/demo.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-
 
 
   <footer class="footer">
