@@ -1,6 +1,6 @@
 /*
-  Joke Machine - Final Version (With Time Display)
-  ESP32 + Make.com (Proxy & Logger) + Google Sheets + NTP Time
+  Joke Machine - Final Version
+  ESP32 + Make.com (Proxy & Logger) + Google Sheets
 */
 
 #include <WiFi.h>
@@ -10,25 +10,14 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
 #include <Keypad.h>
-#include "time.h" // 시간 기능을 위해 추가
+#include <ESP32Servo.h>
 
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 
 // --- Make.com Configuration ---
-String MAKE_JOKE_URL = "https://hook.eu1.make.com/6xulxers22usue25jq6x96cjw342upov"; 
-String MAKE_LOG_URL = "https://hook.eu1.make.com/jwbbmsrbvy69ab5d1xcy7ys37vywpm9h"; 
-
-// --- Ranking API Configuration (Apps Script URL) ---
-String RANKING_API_URL = "https://script.google.com/macros/s/AKfycbx6EzdDuZj9qA-8xsGaygLEpZnMZxxXeZ9n9t2pPDjWR-tAw5adyZA82JwfT8sffkmx/exec";
-
-enum MachineState { STATE_MENU, STATE_RATING, STATE_RANKING }; // STATE_RANKING 추가
-
-// --- Time Configuration (NTP) ---
-const char* ntpServer = "pool.ntp.org";
-const long  gmtOffset_sec = 32400; // UTC +9 (Korea) -> 9 * 3600
-const int   daylightOffset_sec = 0; 
-String lastUpdatedTime = ""; // 마지막 업데이트 시간을 저장할 변수
+String MAKE_JOKE_URL = "https://hook.eu1.make.com/zy7b0hejxuo8et7phv8spy09pi0jlm1v"; 
+String MAKE_LOG_URL = "https://hook.eu1.make.com/oe62icuevcowayxvinrny6xah977xou3"; 
 
 // --- Peripherals Setup ---
 #define TFT_DC 2
@@ -42,8 +31,8 @@ byte rowPins[ROWS] = {27, 26, 25, 33}; byte colPins[COLS] = {32, 17, 16, 22};
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 const int BUZZER_PIN = 14; 
-#define BUZZER_CHANNEL 0 
-//enum MachineState { STATE_MENU, STATE_RATING};
+#define BUZZER_CHANNEL 0 // 이거 추가함
+enum MachineState { STATE_MENU, STATE_RATING };
 MachineState currentState = STATE_MENU; 
 
 String currentJoke = ""; 
@@ -89,18 +78,6 @@ void buzzerLaugh(char scoreChar) {
       }
       break;
   }
-}
-
-// --- Time Helper Function ---
-// 현재 시간을 가져와서 "HH:MM" 형식의 문자열로 반환
-String getCurrentTimeStr() {
-  struct tm timeinfo;
-  if(!getLocalTime(&timeinfo)){
-    return "--:--";
-  }
-  char timeStringBuff[10];
-  strftime(timeStringBuff, sizeof(timeStringBuff), "%H:%M", &timeinfo);
-  return String(timeStringBuff);
 }
 
 // --- Network Functions ---
@@ -206,9 +183,6 @@ void nextJoke(String category) {
     rawData = getJokeFromMake(category);
   }
   
-  // 농담 로드 성공 시 시간 업데이트
-  lastUpdatedTime = getCurrentTimeStr();
-
   String englishPart = "";
   String koreanPart = "";
   
@@ -226,16 +200,7 @@ void nextJoke(String category) {
   }
 
   tft.fillScreen(ILI9341_BLACK); 
-  
-  // --- [시간 표시 추가: 우측 상단] ---
-  tft.setTextSize(1); // 시간을 작게 표시하기 위해 크기 조정
-  tft.setTextColor(ILI9341_DARKGREY);
-  tft.setCursor(260, 5); // 우측 상단 좌표 (화면 크기에 따라 조정 가능)
-  tft.print(lastUpdatedTime);
-
-  // --- [농담 표시] ---
-  tft.setTextSize(2); // 본문 크기 원복
-  tft.setCursor(0, 20); // 시간 밑으로 커서 이동
+  tft.setCursor(0, 0);
   tft.setTextColor(ILI9341_GREEN);
   tft.println(englishPart);
 
@@ -285,7 +250,7 @@ void setup() {
   WiFi.begin(ssid, password, 6);
 
   ledcSetup(BUZZER_CHANNEL, 2000, 8);
-  ledcAttachPin(BUZZER_PIN, BUZZER_CHANNEL); 
+  ledcAttachPin(BUZZER_PIN, BUZZER_CHANNEL); // 얘네 추가함
 
   tft.begin(); tft.setRotation(1);
   tft.setTextColor(ILI9341_WHITE); tft.setTextSize(2);
@@ -295,109 +260,34 @@ void setup() {
   tft.fillScreen(ILI9341_BLACK);
   tft.setCursor(0, 0);
   tft.println("OK! IP=" + WiFi.localIP().toString());
-  
-  // --- NTP 시간 설정 ---
-  tft.println("Syncing Time...");
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   delay(1000); 
-  // ------------------
-
   showMenu();
-}
-
-// 랭킹 시스템
-void showTop3Ranking() {
-  tft.fillScreen(ILI9341_BLACK);
-  tft.setCursor(0, 0);
-  tft.setTextColor(ILI9341_YELLOW);
-  tft.setTextSize(2);
-  tft.println("Loading Top 3 Jokes...");
-
-  if(WiFi.status() != WL_CONNECTED) { return; }
-
-  WiFiClientSecure client;
-  client.setInsecure();
-  HTTPClient http;
-  
-  // 리다이렉션 허용 (Google Script 필수)
-  http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
-  
-  if (http.begin(client, RANKING_API_URL)) {
-    int httpCode = http.GET();
-    if (httpCode == 200) {
-      String payload = http.getString();
-      
-      // JSON 파싱 (1024~2048 정도 크기 권장)
-      DynamicJsonDocument doc(2048);
-      DeserializationError error = deserializeJson(doc, payload);
-
-      if (!error) {
-        tft.fillScreen(ILI9341_BLACK);
-        tft.setCursor(0, 10);
-        tft.setTextColor(ILI9341_CYAN);
-        tft.println("--- Hall of Fame ---");
-        
-        JsonArray arr = doc.as<JsonArray>();
-        int yPos = 40;
-        
-        for (int i = 0; i < arr.size(); i++) {
-          String r = arr[i]["rank"];
-          String j = arr[i]["joke"];
-          float s = arr[i]["rating"];
-
-          tft.setCursor(0, yPos);
-          tft.setTextSize(1);
-          tft.setTextColor(ILI9341_WHITE);
-          tft.printf("#%d [Rating: %.1f]\n", i+1, s);
-          
-          tft.setTextSize(2);
-          tft.setTextColor(ILI9341_GREEN);
-          // 농담이 길면 잘릴 수 있으므로 일부만 출력하거나 줄바꿈 처리
-          tft.println(j.substring(0, 40) + "..."); 
-          yPos += 60;
-        }
-        tft.setTextSize(1);
-        tft.setTextColor(ILI9341_DARKGREY);
-        tft.println("\nPress * to Return");
-      }
-    } else {
-      tft.println("HTTP Error: " + String(httpCode));
-    }
-    http.end();
-  }
-  currentState = STATE_RANKING;
 }
 
 void loop() {
   char key = keypad.getKey();
   if (key != NO_KEY) {
     if (currentState == STATE_MENU) {
-      if (key == 'A') { // 'A' 키를 누르면 랭킹 보기
-        showTop3Ranking();
-      } else {
-        String cat = "";
-        switch (key) {
-          case '1': cat = "Misc"; break; 
-          case '2': cat = "Programming"; break;
-          case '3': cat = "Dark"; break; 
-          case '4': cat = "Pun"; break;
-          case '5': cat = "Spooky"; break; 
-          case '6': cat = "Christmas"; break;
-          case '7': cat = "Any"; break;
-        }
-        if (cat.length() > 0) {
-          tft.fillScreen(ILI9341_BLACK); tft.setCursor(0,0);
-          tft.println("Selected: " + cat);
-          nextJoke(cat); 
-          currentState = STATE_RATING;
-          tft.setTextColor(ILI9341_MAGENTA); tft.println("\nRate (1-5) or *");
-        }
+      String cat = "";
+      switch (key) {
+        case '1': cat = "Misc"; break; 
+        case '2': cat = "Programming"; break;
+        case '3': cat = "Dark"; break; 
+        case '4': cat = "Pun"; break;
+        case '5': cat = "Spooky"; break; 
+        case '6': cat = "Christmas"; break;
+        case '7': cat = "Any"; break;
+      }
+      if (cat.length() > 0) {
+        tft.fillScreen(ILI9341_BLACK); tft.setCursor(0,0);
+        tft.println("Selected: " + cat);
+        nextJoke(cat); 
+        currentState = STATE_RATING;
+        tft.setTextColor(ILI9341_MAGENTA); tft.println("\nRate (1-5) or *");
       }
     } else if (currentState == STATE_RATING) {
       if (key >= '1' && key <= '5') showRatingThankYou(key); 
       else if (key == '*') showMenu();
-    } else if (currentState == STATE_RANKING) {
-      if (key == '*') showMenu(); // 랭킹 화면에서 * 누르면 메뉴로 복귀
     }
   }
   delay(10);
