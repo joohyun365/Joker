@@ -1,6 +1,5 @@
 # 🃏 Joker: IoT-based Smart Joke Machine
 
-![Project Banner](static/images/your_banner_image.png)
 [![ESP32](https://img.shields.io/badge/Device-ESP32-red)]()
 [![PlatformIO](https://img.shields.io/badge/IDE-PlatformIO-orange)]()
 [![Make.com](https://img.shields.io/badge/Cloud-Make.com-purple)]()
@@ -17,8 +16,6 @@ This project overcomes the hardware limitations of the ESP32 (e.g., memory const
 * **Category Selection:** Users can select joke categories (Programming, Pun, Dark, etc.) via a 4x4 Keypad.
 * **Cloud-Powered Translation:** Displays the original English joke on the LCD while simultaneously streaming a Korean translation, enabled by a server-side proxy.
 * **Interactive Rating System:** Users rate jokes (1-5 stars), triggering adaptive buzzer sounds (Celebratory vs. Disappointed tones).
-* **Hall of Fame (Ranking):** Fetches and displays the "Top 3" highest-rated jokes from the Google Sheets database in real-time.
-* **Physical Feedback:** Servo motors animate the device ("Laughing Motion") based on the joke context.
 
 ---
 
@@ -26,8 +23,8 @@ This project overcomes the hardware limitations of the ESP32 (e.g., memory const
 
 To handle heavy SSL/TLS handshakes and complex JSON parsing on a resource-constrained ESP32, we designed a **Middleware Proxy** using Make.com.
 
-![System Diagram](static/images/final_diagram.png)
-
+//![System Diagram](static/images/final_diagram.png)
+Add diagram 
 1.  **Request:** ESP32 sends a lightweight HTTP request to the Make.com Webhook.
 2.  **Process (Cloud):**
     * Make.com fetches a random joke from an external API.
@@ -44,8 +41,7 @@ To handle heavy SSL/TLS handshakes and complex JSON parsing on a resource-constr
 * **MCU:** ESP32 Development Board
 * **Display:** ILI9341 TFT LCD (SPI)
 * **Input:** 4x4 Matrix Keypad
-* **Actuators:** SG90 Servo Motor, Passive Buzzer
-* **Sensors:** LDR (Photoresistor) *
+* **Actuators:** Passive Buzzer
 
 ### Software Stack
 * **Firmware:** C++ (Arduino Framework via PlatformIO)
@@ -72,32 +68,7 @@ We initially implemented an auto-brightness feature using an LDR sensor and PWM 
 
 | Member | Role | Key Contributions |
 |:---:|:---:|:---|
-| **Juhyun Kim** | **System Architect** | • Designed Make.com Cloud Proxy Architecture<br>• Implemented Translation & Ranking Logic<br>• Developed Bi-directional Google Sheets Pipeline |
-| **Taeyeon Kim** | **Hardware Engineer** | • Designed Circuit & Wiring<br>• Developed Servo Motion Logic (Laughing Interaction)<br>• Engineered Adaptive Buzzer Feedback |
-| **Junghoo Kang** | **Embedded Developer**| • Implemented Keypad State Machine<br>• Developed Category Selection Logic<br>• Integrated Sensor Hardware |
+| **김주현** | **System Architect** | • Designed Make.com Cloud Proxy Architecture<br>• Implemented Translation & Logging Logic<br>• Developed Bi-directional Google Sheets Pipeline • Designed Circuit • Developed Category Selection Logic|
+| **강정후** | **Software ~** | • Designed Circuit & Wiring<br>• Engineered Adaptive Buzzer Feedback |
+| **김태연** | **Software ~**| • Implemented Keypad State Machine<br>• Developed Ranking System |
 
----
-
-## 📸 Demo
-
-*(Click the image below to watch the demo video)*
-
-[![Joker Demo Video](static/images/Overview.png)](static/videos/IoT-Joker_Demo.mp4)
-
----
-
-## 📦 How to Run
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/joohyun365/IoT-Project-Joker.git](https://github.com/joohyun365/IoT-Project-Joker.git)
-    ```
-2.  **Open in VSCode:** Ensure **PlatformIO** extension is installed.
-3.  **Setup Wokwi:** Install the **Wokwi Simulator** extension.
-4.  **Run Simulation:** Open `diagram.json` and click the "Start Simulation" button.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
