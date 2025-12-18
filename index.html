@@ -134,7 +134,7 @@
                 <div class="publication-links">
 
                     <span class="link-block">
-                        <a href="https://github.com/joohyun365" target="_blank"
+                        <a href="static/images/IoTFinalPresentation-TeamB.pdf" target="_blank" download="IoTFinalPresentation-TeamB.pdf"
                            class="external-link button is-normal is-rounded is-dark">
                             <span class="icon">
                                 <i class="fas fa-file-alt" style="color: #D3D3D3;"></i>
@@ -179,7 +179,7 @@
           </div>
           <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: linear-gradient(45deg, #0575e6, #7928ca81); padding: 10px;">
             <video poster="" id="tree" autoplay controls muted loop height="100%" style="display: block; width: 100%; border-radius: 15px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);">
-              <source src="static/videos/IoT-Joker_Presentaion.mp4" type="video/mp4">
+              <source src="static/videos/IoTPresentation.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -205,8 +205,6 @@
             <span style="color: #ff69b4;"><strong>(Interactive Rating & Feedback)</strong></span>: Allows users to rate jokes via keypad, triggering adaptive buzzer sounds based on the score.
             <br>
             <span style="color: #32cd32;"><strong>(Cloud Logging & Sorting)</strong></span>: Automatically saves joke content and ratings to Google Sheets and sorts them in descending order.
-            <br>
-            <span style="color: burlywood;"><strong>(Ranking System)</strong></span>: Retrieves and displays the 'Top 3' highest-rated jokes from the database in real-time.
 
           </p>
           <img src="static/images/final_diagram.png" alt="Teaser GIF" height="100%">
@@ -265,24 +263,57 @@
             <p>
               I implemented the <strong>Rating Workflow</strong>. This is how it works:
               </br>1) I give the proxy a joke and its rating from the device
-              </br>2) Proxy finds the Row of the joke on Google Sheets
-              </br>3) Proxy updates the row with  given rating
+              </br>2) Proxy finds the same joke on Google Sheets and gets the row number
+              </br>3) Proxy updates the row with given rating
               </br>4) Proxy returns Success Message to the device
-              <!-- 1) <strong>Write:</strong> The system logs every joke and its user rating to Google Sheets. 
-              2) <strong>Process:</strong> The sheet automatically sorts data by rating. 
-              3) <strong>Read:</strong> The device can fetch the "Top 3" jokes from the sheet to display the most popular content. -->
             </p>
 
             <h4 class="title is-4">3. Cloud-Powered Bilingual Display</h4>
             <p>
-              To support localization without local processing overhead, the translation logic is embedded in the proxy. The device receives and displays the original English joke on the lcd and displays the Korean translation on the terminal.
+              To support localization without local processing overhead, the translation logic is embedded in the proxy. The device receives and displays the original English joke on the lcd and displays the Korean translation on the Serial monitor.
             </p>
-          </div>
+            <h4 class="title is-4" style="margin-top: 30px;">4. Fault Tolerance: Infinite Retry Logic</h4>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/error_code.png" alt="Infinite Retry Logic Code" style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="is-size-6" style="color: #666; margin-top: 5px;">Figure: Code snippet for robust connection handling</p>
+            </div>
 
-          <div style="text-align: center; margin-top: 20px;">
-          <img src="static/images/Sensors and Tools.png" alt="System Architecture and Tools" style="display: block; width: 100%; border-radius: 15px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);">
+            <div class="content has-text-justified">
+              <p>
+                <strong>The Challenge:</strong> 
+                In the simulation environment, network latency often caused SSL handshake failures (Error -80) or timeouts, leading to system crashes or empty data responses. A single connection attempt was insufficient for reliable operation.
+              </p>
+              <p>
+                <strong>The Solution:</strong> 
+                I engineered a <strong>Robust Infinite Retry Mechanism</strong>. 
+                Instead of aborting operation upon failure, the system enters a non-blocking loop that continuously validates the API response. 
+                If an error (e.g., "Error: Network") is detected, it waits for a short interval and autonomously re-attempts the request until a valid data payload is secured. 
+                This ensures <strong>100% service availability</strong> even under unstable network conditions.
+              </p>
+            </div>
+
+            <h4 class="title is-4" style="margin-top: 30px;">5. Engineering Challenge: Resource Optimization</h4>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/LDR_Image.png" alt="LDR Optimization Challenge" style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="is-size-6" style="color: #666; margin-top: 5px;">Figure: LDR Sensor Logic & PWM Control</p>
+            </div>
+
+            <div class="content has-text-justified">
+              <p>
+                <strong>The Conflict:</strong> 
+                I initially implemented an <strong>Auto-Brightness System</strong> using an LDR sensor and PWM. 
+                However, I discovered a critical bottleneck in the Wokwi simulation environment: processing high-frequency PWM interrupts (5000Hz) while simultaneously handling heavy SSL/TLS encryption for the Cloud Proxy caused the CPU usage to spike, dropping simulation speed below 50% and triggering network timeouts.
+              </p>
+              <p>
+                <strong>The Decision (Trade-off):</strong> 
+                Although the logic was functionally correct for physical hardware, the simulation environment could not support both features concurrently. 
+                Prioritizing the <strong>stability of the core network features</strong> (Joke Retrieval & Translation), I made the engineering decision to deprecate the PWM feature in the final simulation build. 
+                This experience highlighted the importance of understanding <strong>resource constraints in embedded systems</strong>.
+              </p>
+            </div>
           </div>
-      
       </div> 
       </div>
     </div>
@@ -290,6 +321,26 @@
 </section>
 
 
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo Pt. 1</h2>
+        <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
+          <video poster="" id="demo-video1" controls muted loop width="100%">
+            <source src="static/videos/demo_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo Pt. 2</h2>
+        <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
+          <video poster="" id="demo-video2" controls muted loop width="100%">
+            <source src="static/videos/demo_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <section class="section" id="BibTeX">
