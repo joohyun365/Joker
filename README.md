@@ -23,8 +23,8 @@ This project overcomes the hardware limitations of the ESP32 (e.g., memory const
 
 To handle heavy SSL/TLS handshakes and complex JSON parsing on a resource-constrained ESP32, we designed a **Middleware Proxy** using Make.com.
 
-//![System Diagram](static/images/final_diagram.png)
-Add diagram 
+![System Diagram](static/images/final_diagram.png)
+
 1.  **Request:** ESP32 sends a lightweight HTTP request to the Make.com Webhook.
 2.  **Process (Cloud):**
     * Make.com fetches a random joke from an external API.
