@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 208.2, "left": -573.2, "attrs": {} },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 96,
+      "left": -129.56,
+      "attrs": { "fastTLS": "1" }
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "lcd1",
+      "top": 33.7,
+      "left": 116.4,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-membrane-keypad",
+      "id": "keypad1",
+      "top": 387.6,
+      "left": -118,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 110.7,
+      "left": -453.9,
+      "rotate": 270,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "lcd1:RST", "esp:4", "purple", [ "h-48", "v67.2" ] ],
+    [ "lcd1:D/C", "esp:2", "#8f4814", [ "h-28.8", "v44.14" ] ],
+    [ "lcd1:SCK", "esp:18", "gray", [ "v-0.01", "h-48", "v-19.2" ] ],
+    [ "lcd1:MISO", "esp:19", "orange", [ "h-67.2", "v-9.61", "h0", "v-19.2" ] ],
+    [ "lcd1:MOSI", "esp:23", "green", [ "h-38.4", "v-67.31" ] ],
+    [ "lcd1:CS", "esp:15", "violet", [ "h-57.6", "v105.6" ] ],
+    [ "bb1:tp.24", "lcd1:VCC", "red", [ "v-138.9", "h347.2" ] ],
+    [ "esp:5V", "bb1:tp.25", "red", [ "h-43.05", "v-76.8", "h-102.4" ] ],
+    [ "bb1:tn.25", "esp:GND.2", "black", [ "h40", "v-139.3", "h201.6" ] ],
+    [ "lcd1:GND", "bb1:tn.23", "black", [ "h-19.7", "v-76.8", "h-337.1" ] ],
+    [ "keypad1:R3", "esp:25", "#8f4814", [ "v-67.2", "h-172.5", "v-124.8" ] ],
+    [ "keypad1:R4", "esp:33", "#8f4814", [ "v-62.4", "h-167.8", "v-139.2" ] ],
+    [ "keypad1:C1", "esp:32", "orange", [ "v-57.6", "h-163.1", "v-153.6" ] ],
+    [ "keypad1:C2", "esp:17", "orange", [ "v0" ] ],
+    [ "keypad1:R2", "esp:26", "#8f4814", [ "v-72", "h-177.2", "v-110.4" ] ],
+    [ "keypad1:C3", "esp:16", "orange", [ "v0" ] ],
+    [ "esp:14", "bz1:+", "green", [ "h0" ] ],
+    [ "bb1:tn.23", "bz1:-", "black", [ "v-24" ] ],
+    [ "bz1:1", "bb1:tn.17", "black", [ "h0" ] ],
+    [ "lcd1:LED", "bb1:tp.19", "red", [ "h-9.6", "v-139.21", "h-393.6", "v158.4" ] ],
+    [ "keypad1:C4", "esp:22", "orange", [ "v0" ] ],
+    [ "bz1:2", "esp:14", "cyan", [ "h192", "v77.2" ] ],
+    [ "keypad1:R1", "esp:27", "#8f4814", [ "v-76.8", "h-182.4", "v-96" ] ]
+  ],
+  "dependencies": {}
+}
