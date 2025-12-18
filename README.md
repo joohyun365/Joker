@@ -69,6 +69,6 @@ We initially implemented an auto-brightness feature using an LDR sensor and PWM 
 | Member | Role | Key Contributions |
 |:---:|:---:|:---|
 | **김주현** | **System Architect** | • Designed Make.com Cloud Proxy Architecture<br>• Implemented Translation & Logging Logic<br>• Developed Bi-directional Google Sheets Pipeline • Designed Circuit • Developed Category Selection Logic|
-| **강정후** | **Software ~** | • Designed Circuit & Wiring<br>• Engineered Adaptive Buzzer Feedback |
+| **강정후** | **Hardware ~** | • Designed Circuit & Wiring<br>• Engineered Adaptive Buzzer Feedback |
 | **김태연** | **Software ~**| • Implemented Keypad State Machine<br>• Developed Ranking System |
 
