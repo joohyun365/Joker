@@ -37,7 +37,6 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
-  <meta charset="UTF-8">
   <title>Joker: Cloud-Offloaded Smart IoT Device</title>
   <style>
     .publication-title {
@@ -108,18 +107,18 @@
                     </span>
                     <span class="author-block">
                       <a href="https://github.com/leo3898" target="_blank">김태연</a><sup>3</sup>
-                    </span>  </br>
+                    </span>  <br>
                     <span class="author-block">
                       <a href="https://github.com/zubair1811"  target="_blank">Class Incharge: Muhammad Zubair Islam</a><sup>4</sup>,
                     </span>
                     <br>
                   </div>
-                </br>
+                <br>
                 <div class="is-size-5 publication-authors">
                 <div style="text-align: center; margin-bottom: 5px;">
-                    <span class="author-block"><sup>1</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
-                    <span class="author-block"><sup>2</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
-                    <span class="author-block"><sup>3</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
+                    <span class="author-block"><sup>1</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> <br>
+                    <span class="author-block"><sup>2</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> <br>
+                    <span class="author-block"><sup>3</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> <br>
                     <span class="author-block"><sup>4</sup> Sejong University, Department of AI and Robotics</span>
                 </div>
             </div>
@@ -175,7 +174,7 @@
         <div class="column is-full">
           <div class="content">
              <h2 class="title is-3" style="border-left: 5px solid #0575e6; padding-left: 10px;">
-               Motivation: Why Joker?
+                Motivation: Why Joker?
              </h2>
              <div class="content has-text-justified">
                 <p>
@@ -238,14 +237,14 @@
                   </tr>
                   <tr>
                     <td><strong>Translation</strong></td>
-                   <td>Google Translate API (via Make.com)</td>
+                    <td>Google Translate API (via Make.com)</td>
                   </tr>
                  <tr>
                    <td><strong>Peripherals</strong></td>
                    <td>ILI9341 LCD, 4x4 Keypad, Passive Buzzer</td>
                  </tr>
                </tbody>
-             </table>
+              </table>
             </div>
         </div>
       </div>
@@ -314,48 +313,54 @@
         <div class="column is-full">
           <div class="content">
            <h2 class="title is-3" style="border-left: 5px solid #7928ca; padding-left: 10px;">
-             Implementation & Workflow
+              Implementation & Workflow
             </h2>
             
            <div class="content has-text-justified">
-              <p>
-                We overcame the hardware limitations of the ESP32 (Memory/SSL issues) by designing a <strong>Cloud-Offloaded Architecture</strong>.
-              </p>
-              
-              <h4 class="title is-4">System Workflow</h4>
-              <p>The system operates in a loop: <strong>Input &rarr; Process (Cloud Proxy) &rarr; Output &rarr; Feedback</strong>.</p>
-              
-              <!-- <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
-              </div>
-              
-              <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow3.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-              </div> -->
-              
-              <div style="display: flex; justify-content: center; align-items: center; gap: 100px; margin-bottom: 30px;">
-                <div style="width: 450px; text-align: center;">
-                  <img src="static/images/workflow1.png" alt="Category Icon" style="width: 100%;">
-                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
-                </div>
-                <div style="width: 300px; text-align: center;">
-                  <img src="static/images/workflow3.png" alt="Translate Icon" style="width: 100%;">
-                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-                </div>
-            </div>
+            <p>Our project utilizes a cloud-offloaded architecture to handle data processing, translation, and database management efficiently. My key role was to get different categories of jokes depending on the keypad input and getting the translation of the joke. These are the details of my work:</p>
+
+            <h4 class="title is-4">1. Cloud-Offloaded Proxy Architecture</h4>
             
             <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/appscript_code.png" alt="appscript_code" style="max-width: 50%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Appscript Code</p>
+                <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
             </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/workflow2.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
+            </div>
+            
+            <p>
+              I implemented a <strong>Server-Side Proxy (Make.com)</strong> to handle heavy API requests. 
+              By doing this, I prevented memory overflow. This is how it works: 
+              <br> 1) I give the proxy a category 
+              <br> 2) Proxy fetches jokes from the external API 
+              <br> 3) Writes the jokes on Google Sheets 
+              <br> 4) Translates them into Korean using built in Google Translate function 
+              <br> 5) Returns optimized text data to the ESP32.
+            </p>
+            
+            <h4 class="title is-4">2. Logging Rating</h4>
+            <p>
+              I implemented the <strong>Rating Workflow</strong>. This is how it works:
+              <br> 1) I give the proxy a joke and its rating from the device
+              <br> 2) Proxy finds the same joke on Google Sheets and gets the row number
+              <br> 3) Proxy updates the row with given rating
+              <br> 4) Proxy returns Success Message to the device
+            </p>
+
+            <h4 class="title is-4">3. Cloud-Powered Bilingual Display</h4>
+            <p>
+              To support localization without local processing overhead, the translation logic is embedded in the proxy. The device receives and displays the original English joke on the lcd and displays the Korean translation on the Serial monitor.
+            </p>
            </div>
           </div> 
         </div>
       </div>
     </div>
   </section>
+
 
 
 <section class="section hero is-small">
@@ -400,405 +405,3 @@
 
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Joker: IoT-based Smart Joke Machine with Cloud-Offloaded Architecture">
-  <meta property="og:title" content="Joker: Knowledge to Sight"/>
-  <meta property="og:description" content="Cloud-Offloaded IoT Architecture for Smart Content Delivery"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <meta property="og:image" content="static/image/your_banner_image.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-
-  <meta name="twitter:title" content="Joker: IoT Smart Device">
-  <meta name="twitter:description" content="IoT-based Smart Joke Machine with Cloud-Offloaded Architecture">
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <meta name="keywords" content="IoT, ESP32, Make.com, Cloud Proxy, Embedded System">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <link rel="icon" type="image/x-icon" href="static/images/sejong.png">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
-  <meta charset="UTF-8">
-  <title>Joker: Cloud-Offloaded Smart IoT Device</title>
-  <style>
-    .publication-title {
-      font-size: 3rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .title-text {
-    background: linear-gradient(90deg, #00f260, #0575e6, #ff0080, #7928ca);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.1),
-    4px 4px 8px rgba(0, 0, 0, 0.2);
-    animation: gradientShift 30s infinite ease-in-out;
-  }
-
-    @keyframes gradientShift {
-      0% { background-position: 48% 50%; }
-      50% { background-position: 52% 50%; }
-      100% { background-position: 48% 50%; }
-    }
-    .publication-links .button {
-  background: linear-gradient(45deg, #00f260, #0575e6, #ff0080, #7928ca);
-  background-size: 300% 300%;
-  color: white !important;
-  font-weight: 600;
-  border: none;
-  transition: background-position 3s ease;
-  text-shadow: 0 0 px black;
-}
-
-.publication-links .button:hover {
-  background-position: 100% 50%;
-  color: #fff !important;
-}
-
-.publication-links .button .icon i,
-.publication-links .button .icon img {
-  filter: drop-shadow(0 0 1px rgba(0,0,0,0.7));
-  vertical-align: middle;
-}
-
-.publication-links .link-block {
-  margin: 0 0.3rem;
-}
-  </style>
-</head>
-<body>
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title publication-title">
-             <span class="title-text">Joker </span>
-            </h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                    <a href="https://github.com/joohyun365" target="_blank">김주현</a><sup>1</sup>,
-                    <span class="author-block">
-                      <a href="https://github.com/kjhu1211-cpu" target="_blank">강정후</a><sup>2</sup>,
-                    </span>
-                    <span class="author-block">
-                      <a href="https://github.com/leo3898" target="_blank">김태연</a><sup>3</sup>
-                    </span>  </br>
-                    <span class="author-block">
-                      <a href="https://github.com/zubair1811"  target="_blank">Class Incharge: Muhammad Zubair Islam</a><sup>4</sup>,
-                    </span>
-                    <br>
-                  </div>
-                </br>
-                <div class="is-size-5 publication-authors">
-                <div style="text-align: center; margin-bottom: 5px;">
-                    <span class="author-block"><sup>1</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
-                    <span class="author-block"><sup>2</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
-                    <span class="author-block"><sup>3</sup> Sejong University, Department of Intelligent Mechatronics Engineering</span> </br>
-                    <span class="author-block"><sup>4</sup> Sejong University, Department of AI and Robotics</span>
-                </div>
-            </div>
-            
-            <div class="column has-text-centered">
-                <div class="publication-links">
-                    <span class="link-block">
-                        <a href="static/images/IoTFinalPresentation-TeamB.pdf" target="_blank" download="IoTFinalPresentation-TeamB.pdf"
-                           class="external-link button is-normal is-rounded is-dark">
-                            <span class="icon">
-                                <i class="fas fa-file-alt" style="color: #D3D3D3;"></i>
-                              </span>
-                            <span>Slides</span>
-                        </a>
-                    </span>
-                    <span class="link-block">
-                        <a href="https://github.com/joohyun365/Joker.git" target="_blank"
-                           class="external-link button is-normal is-rounded is-dark">
-                            <span class="icon">
-                                <i class="fab fa-github" style="color: black;"></i>
-                            </span>
-                            <span>Code</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-small">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Presentation Slides</h2>
-          <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px;">
-              <video poster="" id="presentation-video" controls width="100%">
-                <source src="static/videos/IoTPresentation.mp4" type="video/mp4">
-              </video>
-          </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="content">
-             <h2 class="title is-3" style="border-left: 5px solid #0575e6; padding-left: 10px;">
-               Motivation: Why Joker?
-             </h2>
-             <div class="content has-text-justified">
-                <p>
-                  In today's fast-paced digital world, moments of simple joy and spontaneous laughter are becoming rare. 
-                  Existing entertainment devices are often passive or require complex interactions.
-                </p>
-                <p>
-                  <strong>Joker</strong> aims to solve this by providing an <strong>interactive, tangible, and localized humor experience</strong>. 
-                  It's not just a screen; it's a smart companion that reacts to physical inputs (keypad), understands context (ranking system), and breaks language barriers (real-time translation) to deliver happiness instantly.
-                </p>
-             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero is-small">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="content">
-            <h2 class="title is-3" style="border-left: 5px solid #ff0080; padding-left: 10px;">
-               Core Features
-              </h2>
-              <div class="content has-text-justified">
-                <p>Joker integrates multiple IoT capabilities to create a rich user experience:</p>
-                <ul>
-                  <li><strong>Smart Retrieval:</strong> Fetches random jokes via API based on user-selected categories (Programming, Dark, Pun, etc.).</li>
-                  <li><strong>Real-time Translation:</strong> Automatically translates English jokes into Korean for a bilingual experience.</li>
-                  <li><strong>Physical Interaction:</strong> Supports 'Keypad Input' for controls.</li>
-                  <li><strong>Auditory & Visual Feedback:</strong> Adaptive Buzzer sounds based on ratings.</li>
-                  <li><strong>Ranking System:</strong> Tracks user ratings in the cloud and displays the 'Top 3 Hall of Fame'.</li>
-                </ul>
-              </div>
-             <div style="text-align: center; margin-top: 30px;">
-                <img src="static/images/final_diagram.png" alt="Overview" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="is-size-6" style="color: #666;">Figure: Complete System Architecture</p>
-              </div>
-              <h4 class="title is-4">Technical Stack</h4>
-              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-               <thead>
-                 <tr>
-                   <th style="width: 30%;">Component</th>
-                   <th>Technology Used</th>
-                  </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   <td><strong>MCU</strong></td>
-                   <td>ESP32 (Wokwi Simulation & Hardware)</td>
-                 </tr>
-                 <tr>
-                   <td><strong>Middleware</strong></td>
-                   <td>Make.com (Webhook, JSON Parser, HTTP Router)</td>
-                  </tr>
-                 <tr>
-                   <td><strong>Database</strong></td>
-                   <td>Google Sheets API (Logging, Sorting, Ranking)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Translation</strong></td>
-                   <td>Google Translate API (via Make.com)</td>
-                  </tr>
-                 <tr>
-                   <td><strong>Peripherals</strong></td>
-                   <td>ILI9341 LCD, 4x4 Keypad, Passive Buzzer</td>
-                 </tr>
-               </tbody>
-             </table>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h2 class="title is-3" style="border-left: 5px solid #00f260; padding-left: 10px;">
-            Team Contributions
-          </h2>
-          <div class="content">
-            <p>Each member contributed to specific modules to build the integrated system.</p>
-            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th class="has-text-centered" style="width: 25%;">Member</th>
-                  <th class="has-text-centered">Key Responsibilities</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="has-text-centered"><strong>김주현 (Me)</strong></td>
-                  <td>
-                    <ul>
-                        <li>Cloud-Offloaded Proxy Architecture Design (Make.com)</li>
-                        <li>Translation & Localization Logic</li>
-                        <li>Google Sheets DB Integration</li>
-                        <li>Network Stability & Retry Logic</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="has-text-centered"><strong>강정후</strong></td>
-                  <td>
-                    <ul>
-                        <li>Circuit and Wire Design</li>
-                        <li>Engineered Adaptive Buzzer Feedback</li>
-                        <li>Network Stability</li>
-                      </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="has-text-centered"><strong>김태연</strong></td>
-                  <td>
-                    <ul>
-                      <li>각자 채우기</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero is-small">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="content">
-           <h2 class="title is-3" style="border-left: 5px solid #7928ca; padding-left: 10px;">
-             Implementation & Workflow
-            </h2>
-            
-           <div class="content has-text-justified">
-              <p>
-                We overcame the hardware limitations of the ESP32 (Memory/SSL issues) by designing a <strong>Cloud-Offloaded Architecture</strong>.
-              </p>
-              
-              <h4 class="title is-4">System Workflow</h4>
-              <p>The system operates in a loop: <strong>Input &rarr; Process (Cloud Proxy) &rarr; Output &rarr; Feedback</strong>.</p>
-              
-              <!-- <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
-              </div>
-              
-              <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow3.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-              </div> -->
-              
-              <div style="display: flex; justify-content: center; align-items: center; gap: 100px; margin-bottom: 30px;">
-                <div style="width: 450px; text-align: center;">
-                  <img src="static/images/workflow1.png" alt="Category Icon" style="width: 100%;">
-                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
-                </div>
-                <div style="width: 300px; text-align: center;">
-                  <img src="static/images/workflow3.png" alt="Translate Icon" style="width: 100%;">
-                  <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/appscript_code.png" alt="appscript_code" style="max-width: 50%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Appscript Code</p>
-            </div>
-           </div>
-          </div> 
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-<section class="section hero is-small">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo Pt. 1</h2>
-        <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
-          <video poster="" id="demo-video1" controls muted loop width="100%">
-            <source src="static/videos/demo_1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Project Demo Pt. 2</h2>
-        <div style="border: none; border-radius: 15px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); overflow: hidden; background: black; padding: 0px; margin-bottom: 50px;">
-          <video poster="" id="demo-video2" controls muted loop width="100%">
-            <source src="static/videos/demo_2.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
->>>>>>> 1f20b797144b7055aa3f46787ea999788b10a2fd
