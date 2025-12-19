@@ -340,18 +340,56 @@
               <br> 5) Returning optimized text data back to the ESP32.
             </p>
             
-            <h4 class="title is-4">2. Logging Rating</h4>
+            <h4 class="title is-4">2. Logging Rating & Automatic Ranking</h4>
             <p>
-              The <strong>Rating Workflow</strong> manages user feedback and data synchronization:
-              <br> 1) Sending the joke content and its user-assigned rating to the proxy.
-              <br> 2) Identifying the corresponding joke in Google Sheets and retrieving the row index.
-              <br> 3) Updating the specific row with the new rating data.
-              <br> 4) Returning a success confirmation message to the device.
+              The <strong>Rating Workflow</strong> manages user feedback and data synchronization between the Wokwi simulator and the cloud database:
+            </p>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/google_sheet.png" alt="Google Sheet Storage" style="max-width: 90%; height: auto; border-radius: 10px; border: 1px solid #ddd;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Joke Storage in Google Sheets</p>
+            </div>
+
+            <p>
+              When a rating is submitted from the Wokwi simulator, the joke is stored in Google Sheets. To maintain an updated leader board, an <strong>App Script</strong> and <strong>Trigger</strong> are utilized to automatically sort the entries in descending order based on ratings.
             </p>
 
-            <h4 class="title is-4">3. Cloud-Powered Bilingual Display</h4>
+            <div class="columns is-centered" style="margin: 20px 0;">
+              <div class="column is-half has-text-centered">
+                  <img src="static/images/app_script.png" alt="App Script Code" style="width: 100%; border-radius: 10px;">
+                  <p style="font-weight: bold;">Google App Script Logic</p>
+              </div>
+              <div class="column is-half has-text-centered">
+                  <img src="static/images/trigger.png" alt="Script Trigger" style="width: 100%; border-radius: 10px;">
+                  <p style="font-weight: bold;">Automation Trigger</p>
+              </div>
+            </div>
+
             <p>
-              To support localization without local processing overhead, translation logic is embedded within the proxy. The system displays the original English joke on the LCD while outputting the Korean translation via the Serial monitor.
+              <br> 1) Sending the joke content and its user-assigned rating from Wokwi to the proxy.
+              <br> 2) Identifying the corresponding joke in Google Sheets and retrieving the row index.
+              <br> 3) Updating the row with the new rating, triggering an automatic descending sort.
+              <br> 4) Returning a success confirmation and updated ranking data to the device.
+            </p>
+
+            <h4 class="title is-4">3. Cloud-Powered Bilingual Display & Ranking View</h4>
+            <p>
+              To support localization without local processing overhead, translation logic is embedded within the proxy. Additionally, users can access real-time rankings directly on the ILI9341 display.
+            </p>
+
+            <div class="columns is-centered" style="margin: 20px 0;">
+              <div class="column is-half has-text-centered">
+                  <img src="static/images/ranking_1.png" alt="Category Selection" style="width: 80%; border-radius: 5px; background: #000; padding: 5px;">
+                  <p style="font-weight: bold;">Menu: Select 'A' for Rank</p>
+              </div>
+              <div class="column is-half has-text-centered">
+                  <img src="static/images/ranking_2.png" alt="Loading Rank" style="width: 80%; border-radius: 5px; background: #000; padding: 5px;">
+                  <p style="font-weight: bold;">Fetching Cloud Ranking</p>
+              </div>
+            </div>
+
+            <p>
+              The system displays the original English joke on the LCD while outputting the Korean translation via the Serial monitor. When the 'Rank' option is selected (Key 'A'), the device fetches and presents the sorted list from the cloud.
             </p>
            </div>
           </div> 
