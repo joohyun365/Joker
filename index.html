@@ -317,7 +317,7 @@
             </h2>
             
            <div class="content has-text-justified">
-            <p>Our project utilizes a cloud-offloaded architecture to handle data processing, translation, and database management efficiently. My key role was to get different categories of jokes depending on the keypad input and getting the translation of the joke. These are the details of my work:</p>
+            <p>The project utilizes a cloud-offloaded architecture to handle data processing, translation, and database management efficiently. The system retrieves different categories of jokes based on keypad input and processes real-time translations. The operational details are as follows:</p>
 
             <h4 class="title is-4">1. Cloud-Offloaded Proxy Architecture</h4>
             
@@ -332,27 +332,26 @@
             </div>
             
             <p>
-              I implemented a <strong>Server-Side Proxy (Make.com)</strong> to handle heavy API requests. 
-              By doing this, I prevented memory overflow. This is how it works: 
-              <br> 1) I give the proxy a category 
-              <br> 2) Proxy fetches jokes from the external API 
-              <br> 3) Writes the jokes on Google Sheets 
-              <br> 4) Translates them into Korean using built in Google Translate function 
-              <br> 5) Returns optimized text data to the ESP32.
+              A <strong>Server-Side Proxy (Make.com)</strong> is utilized to handle heavy API requests and prevent memory overflow on the device. The workflow is executed in the following steps:
+              <br> 1) Sending a specific category to the proxy from the device.
+              <br> 2) Fetching joke data from external APIs via the proxy.
+              <br> 3) Logging the retrieved jokes onto Google Sheets.
+              <br> 4) Translating the content into Korean using the integrated Google Translate function.
+              <br> 5) Returning optimized text data back to the ESP32.
             </p>
             
             <h4 class="title is-4">2. Logging Rating</h4>
             <p>
-              I implemented the <strong>Rating Workflow</strong>. This is how it works:
-              <br> 1) I give the proxy a joke and its rating from the device
-              <br> 2) Proxy finds the same joke on Google Sheets and gets the row number
-              <br> 3) Proxy updates the row with given rating
-              <br> 4) Proxy returns Success Message to the device
+              The <strong>Rating Workflow</strong> manages user feedback and data synchronization:
+              <br> 1) Sending the joke content and its user-assigned rating to the proxy.
+              <br> 2) Identifying the corresponding joke in Google Sheets and retrieving the row index.
+              <br> 3) Updating the specific row with the new rating data.
+              <br> 4) Returning a success confirmation message to the device.
             </p>
 
             <h4 class="title is-4">3. Cloud-Powered Bilingual Display</h4>
             <p>
-              To support localization without local processing overhead, the translation logic is embedded in the proxy. The device receives and displays the original English joke on the lcd and displays the Korean translation on the Serial monitor.
+              To support localization without local processing overhead, translation logic is embedded within the proxy. The system displays the original English joke on the LCD while outputting the Korean translation via the Serial monitor.
             </p>
            </div>
           </div> 
@@ -360,8 +359,6 @@
       </div>
     </div>
   </section>
-
-
 
 <section class="section hero is-small">
   <div class="container is-max-desktop">
