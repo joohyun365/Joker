@@ -82,4 +82,4 @@ homepage: https://kjhu1211-cpu.github.io/IoT-000B/
 
 김태연
 github: https://github.com/leo3898/IoT-000B
-homepage: https://leo3898.github.io/IoT_000B/
+homepage: https://leo3898.github.io/IoT-000B/
