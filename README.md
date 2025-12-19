@@ -70,7 +70,7 @@ We initially implemented an auto-brightness feature using an LDR sensor and PWM 
 |:---:|:---:|:---|
 | **김주현** | **System Architect** | • Designed Make.com Cloud Proxy Architecture<br>• Implemented Translation & Logging Logic<br>• Developed Bi-directional Google Sheets Pipeline • Designed Circuit • Developed Category Selection Logic|
 | **강정후** | **Hardware** | • Designed Circuit & Wiring<br>• Engineered Adaptive Buzzer Feedback |
-| **김태연** | **Software ~**| • Implemented Keypad State Machine<br>• Developed Ranking System |
+| **김태연** | **Software**| • Implemented Keypad State Machine<br>• Developed Ranking System |
 
 김주현
 github: https://github.com/joohyun365/IoT-Project-Joker-B
@@ -81,5 +81,5 @@ github: https://github.com/kjhu1211-cpu/IoT-000B
 homepage: https://kjhu1211-cpu.github.io/IoT-000B/
 
 김태연
-github: https://github.com/leo3898/IoT_000B
+github: https://github.com/leo3898/IoT-000B
 homepage: https://leo3898.github.io/IoT_000B/
