@@ -323,16 +323,11 @@
             
             <div style="text-align: center; margin: 20px 0;">
                 <img src="static/images/workflow1.png" alt="Fetching Joke" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke</p>
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Fetching Joke Workflow</p>
             </div>
 
-            <div style="text-align: center; margin: 20px 0;">
-                <img src="static/images/workflow2.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Logging Rating</p>
-            </div>
-            
             <p>
-              A <strong>Server-Side Proxy (Make.com)</strong> is utilized to handle heavy API requests and prevent memory overflow on the device. The workflow is executed in the following steps:
+              A <strong>Server-Side Proxy (Make.com)</strong> is utilized to handle heavy API requests and prevent memory overflow on the device. The fetching workflow is executed as follows:
               <br> 1) Sending a specific category to the proxy from the device.
               <br> 2) Fetching joke data from external APIs via the proxy.
               <br> 3) Logging the retrieved jokes onto Google Sheets.
@@ -340,56 +335,61 @@
               <br> 5) Returning optimized text data back to the ESP32.
             </p>
             
-            <h4 class="title is-4">2. Logging Rating & Automatic Ranking</h4>
-            <p>
-              The <strong>Rating Workflow</strong> manages user feedback and data synchronization between the Wokwi simulator and the cloud database:
-            </p>
-            
+            <h4 class="title is-4">2. Logging Rating & Automatic Ranking (App Script)</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="static/images/workflow2.png" alt="Logging Rating" style="max-width: 90%; height: auto; border-radius: 10px;">
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Rating Submission Workflow</p>
+            </div>
+
             <div style="text-align: center; margin: 20px 0;">
                 <img src="static/images/google_sheet.png" alt="Google Sheet Storage" style="max-width: 90%; height: auto; border-radius: 10px; border: 1px solid #ddd;">
-                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Joke Storage in Google Sheets</p>
+                <p class="is-size-5" style="font-weight: bold; color: #4a4a4a; margin-top: 10px;">Joke Database in Google Sheets</p>
             </div>
 
             <p>
-              When a rating is submitted from the Wokwi simulator, the joke is stored in Google Sheets. To maintain an updated leader board, an <strong>App Script</strong> and <strong>Trigger</strong> are utilized to automatically sort the entries in descending order based on ratings.
+              When a rating is submitted from the <strong>Wokwi simulator</strong>, the joke and its rating are stored in <strong>Google Sheets</strong>. To maintain a real-time leaderboard, <strong>Google App Script</strong> and <strong>Triggers</strong> are utilized to automatically sort the entries in descending order based on ratings.
             </p>
 
             <div class="columns is-centered" style="margin: 20px 0;">
               <div class="column is-half has-text-centered">
                   <img src="static/images/app_script.png" alt="App Script Code" style="width: 100%; border-radius: 10px;">
-                  <p style="font-weight: bold;">Google App Script Logic</p>
+                  <p style="font-weight: bold;">Google App Script (Sorting Logic)</p>
               </div>
               <div class="column is-half has-text-centered">
                   <img src="static/images/trigger.png" alt="Script Trigger" style="width: 100%; border-radius: 10px;">
-                  <p style="font-weight: bold;">Automation Trigger</p>
+                  <p style="font-weight: bold;">Automation Trigger Settings</p>
               </div>
             </div>
 
             <p>
-              <br> 1) Sending the joke content and its user-assigned rating from Wokwi to the proxy.
+              The detailed <strong>Logging Task</strong> steps:
+              <br> 1) Sending the joke content and its user-assigned rating from the Wokwi simulator to the proxy.
               <br> 2) Identifying the corresponding joke in Google Sheets and retrieving the row index.
-              <br> 3) Updating the row with the new rating, triggering an automatic descending sort.
+              <br> 3) Updating the row with the new rating, which triggers the automatic descending sort script.
               <br> 4) Returning a success confirmation and updated ranking data to the device.
             </p>
 
             <h4 class="title is-4">3. Cloud-Powered Bilingual Display & Ranking View</h4>
             <p>
-              To support localization without local processing overhead, translation logic is embedded within the proxy. Additionally, users can access real-time rankings directly on the ILI9341 display.
+              To support localization without local processing overhead, translation logic is embedded within the proxy. Additionally, the sorted ranking can be retrieved and displayed on the device through a dedicated menu.
             </p>
 
             <div class="columns is-centered" style="margin: 20px 0;">
               <div class="column is-half has-text-centered">
                   <img src="static/images/ranking_1.png" alt="Category Selection" style="width: 80%; border-radius: 5px; background: #000; padding: 5px;">
-                  <p style="font-weight: bold;">Menu: Select 'A' for Rank</p>
+                  <p style="font-weight: bold;">Step 1: Select 'A' for Ranking Menu</p>
               </div>
               <div class="column is-half has-text-centered">
                   <img src="static/images/ranking_2.png" alt="Loading Rank" style="width: 80%; border-radius: 5px; background: #000; padding: 5px;">
-                  <p style="font-weight: bold;">Fetching Cloud Ranking</p>
+                  <p style="font-weight: bold;">Step 2: Fetching sorted Ranking from Cloud</p>
               </div>
             </div>
 
             <p>
-              The system displays the original English joke on the LCD while outputting the Korean translation via the Serial monitor. When the 'Rank' option is selected (Key 'A'), the device fetches and presents the sorted list from the cloud.
+              Final display and ranking tasks:
+              <br> 1) The system displays the original English joke on the LCD while outputting the Korean translation via the Serial monitor.
+              <br> 2) Upon selecting the 'Rank' option (Key 'A') in Wokwi, the device sends a request to the proxy to fetch the top-rated jokes from the sorted Google Sheet.
+              <br> 3) The device receives the data and displays the fetched "Hall of Fame" ranking on the ILI9341 screen.
             </p>
            </div>
           </div> 
